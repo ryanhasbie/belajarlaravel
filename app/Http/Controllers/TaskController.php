@@ -14,6 +14,7 @@ class TaskController extends Controller
     {
         return view('tasks.index', 
         [
+            'task' => new Task,
             'tasks' => Task::orderBy('id', 'desc')->get(),
         ]);
     }
