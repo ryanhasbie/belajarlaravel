@@ -29,6 +29,8 @@ class RegistrationController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        session()->flash('success', 'Registration Success');
+
         return redirect('/');
     }
 }
