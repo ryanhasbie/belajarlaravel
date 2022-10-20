@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -22,10 +23,21 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
+        // $credentials = ['email' => $request->email, 'password' => $request->password];
+
         if (Auth::attempt($attributes)) {
             session()->flash('success', 'Berhasil login');
-            return redirect('/');
+            return redirect(RouteServiceProvider::HOME);
         }
+
+        // $user = User::whereEmail($request->email)->first();
+        // if ($user) {
+        //     if (Hash::check($request->password, $user->password)) {
+        //         Auth::login($user);
+        //         session()->flash('success', 'Berhasil login');
+        //         return redirect('/');
+        //     }
+        // }
 
         throw ValidationException::withMessages([
             'email' => 'Email atau password salah!',

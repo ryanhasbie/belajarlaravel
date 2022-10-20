@@ -28,12 +28,12 @@ Route::get('/profile/{identifier}', [ProfileInformationController::class, '__inv
 // // delete data
 // Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
 
-Route::resource('/tasks', TaskController::class);
+Route::resource('/tasks', TaskController::class)->middleware('auth');
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/{user:username}', [UserController::class, 'show'])->name('users.show');
 
-Route::get('/register', [RegistrationController::class, 'create'])->name('register');
-Route::post('/register', [RegistrationController::class, 'store'])->name('register');
+Route::get('/register', [RegistrationController::class, 'create'])->name('register')->middleware('guest');
+Route::post('/register', [RegistrationController::class, 'store'])->name('register')->middleware('guest');
 
-Route::get('/login', [LoginController::class, 'create'])->name('login');
-Route::post('/login', [LoginController::class, 'store'])->name('login');
+Route::get('/login', [LoginController::class, 'create'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'store'])->name('login')->middleware('guest');
