@@ -8,6 +8,7 @@
                 <li><a href="{{$url}}">{{$name}}</a></li>
             @endforeach
                 <li><a href="{{ route('register') }}">Registrasi</a></li>
+                <li><a href="{{ route('login') }}">Login</a></li>
         </ul>
         </div>
     </div>
